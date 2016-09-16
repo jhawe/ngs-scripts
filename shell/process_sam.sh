@@ -9,8 +9,24 @@
 
 ###
 # Vars
-# TODO: proper usage information and paramter parsing
+# TODO: finish proper usage information and paramter parsing
 ###
+while getopts ":m:" opt; do
+ case $opt in
+  a)
+   echo "-m was triggered. Paramter: $OPTARG"
+   ;;
+  :)
+   echo "Argument for option -$OPTARG is empty." >&2
+   ;;
+  \?)
+   echo "Invalid option." >&2
+   ;;
+esac
+done
+
+exit
+
 sam=$1
 outdir=$2
 if [ "$#" == "3" ] ; then
