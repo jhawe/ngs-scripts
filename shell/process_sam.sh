@@ -34,4 +34,6 @@ st index ${prefix}.bam
 picard=...
 tmp=${prefix}.tmp
 met=${prefix}.met
-java -jar ${picard} REMOVE_DUPLICATES INPUT=${prefix}.bam OUTPUT=${tmp} METRICS=${met}
+java -jar ${picard} MarkDuplicatesWithMateCigar REMOVE_DUPLICATES=TRUE INPUT=${prefix}.bam OUTPUT=${tmp} METRICS=${met}
+mv ${tmp} ${prefix}.bam
+st index ${prefix}.bam
