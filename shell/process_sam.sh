@@ -19,7 +19,7 @@ elif
 fi
 
 # set samtools path
-st=~/bin/samtools
+st=${SAMTOOLS}
 
 ###
 # start the processing
@@ -30,13 +30,8 @@ st index ${prefix}.bam
 
 
 # TODO: complete dedubbing
-# set picard tools location
-picard=...
 tmp=${prefix}.tmp
 met=${prefix}.met
-java -jar ${picard} MarkDuplicatesWithMateCigar REMOVE_DUPLICATES=TRUE INPUT=${prefix}.bam OUTPUT=${tmp} METRICS=${met}
+java -jar ${PICARD} MarkDuplicatesWithMateCigar REMOVE_DUPLICATES=TRUE INPUT=${prefix}.bam OUTPUT=${tmp} METRICS=${met}
 mv ${tmp} ${prefix}.bam
 st index ${prefix}.bam
-
-
-##testsetsetset
