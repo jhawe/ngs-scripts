@@ -11,10 +11,10 @@
 # Vars
 # TODO: finish proper usage information and paramter parsing
 ###
-while getopts ":m:" opt; do
+while getopts ":m:i:o:q:d" opt; do
  case $opt in
-  a)
-   echo "-m was triggered. Paramter: $OPTARG"
+  m)
+   echo "Mapping not yet implemented. you have to provide a sam file."
    ;;
   :)
    echo "Argument for option -$OPTARG is empty." >&2
@@ -22,7 +22,19 @@ while getopts ":m:" opt; do
   \?)
    echo "Invalid option." >&2
    ;;
-esac
+  i)
+   input=$OPTARG
+   ;;
+  o)
+   outdir=$OPTARG
+   ;;
+  q)
+   qval=$OPTARG
+   ;;
+  d)
+   dedup=T
+   ;;
+ esac
 done
 
 exit
