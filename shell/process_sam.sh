@@ -30,3 +30,8 @@ st index ${prefix}.bam
 
 
 # TODO: add dedubbing
+# set picard tools location
+picard=...
+tmp=${prefix}.tmp
+met=${prefix}.met
+java -jar ${picard} REMOVE_DUPLICATES INPUT=${prefix}.bam OUTPUT=${tmp} METRICS=${met}
