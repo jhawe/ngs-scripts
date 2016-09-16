@@ -25,18 +25,29 @@ echo "Samtools: $SAMTOOLS"
 echo "Picard: $PICARD"
 
 # set samtools path
-st=${SAMTOOLS}
+if [ -n "$VAR" ] ; then
+ st=${SAMTOOLS}
+else
+ st=samtools
+fi
 
-echo "Converting and sorting."
+if [ -z "$PICARD" ] ; then
+ echo "$PICARD not set."
+ exit
+fi
+
 ###
 # start the processing
 ###
+echo "Converting and sorting."
 $st view -bS -q 30 ${sam} \
 | $st sort - > ${prefix}.bam
 $st index ${prefix}.bam
 
 
-# TODO: complete dedubbing
+###
+# Dedupping.
+###
 echo "Removing duplicates."
 tmp=${prefix}.tmp
 met=${prefix}.met
