@@ -29,7 +29,7 @@ st view -bS -q 30 ${sam} \
 st index ${prefix}.bam
 
 
-# TODO: add dedubbing
+# TODO: complete dedubbing
 # set picard tools location
 picard=...
 tmp=${prefix}.tmp
