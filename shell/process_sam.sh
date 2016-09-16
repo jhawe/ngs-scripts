@@ -27,3 +27,6 @@ st=~/bin/samtools
 st view -bS -q 30 ${sam} \
 | st sort - > ${prefix}.bam
 st index ${prefix}.bam
+
+
+# TODO: add dedubbing
