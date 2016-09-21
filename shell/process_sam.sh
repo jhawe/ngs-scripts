@@ -3,24 +3,39 @@
 ###
 # Needs samtools v1.3.*
 # Assumes $SAMTOOLS variable containing path to samtools binary
-# Assumes $PICARD variable containing path to picard.jar 
+# Assumes $PICARD variable containing path to picard.jar
 # Note: Proper argument parsing has yet to be implemented.
 ###
+
+# define help var (found on stackoverflow)
+read -d '' help <<- EOF
+ usage: process_sam.sh [-q QVAL] [-d] [-m <bwa|bowtie>] -i <INPUT.(SAM|FASTQ)> -o <OUTDIR>
+
+ TODO: proper help
+ Report bugs to: https://github.com/jhawe/ngs-scripts
+ home page: -
+EOF
 
 ###
 # Vars
 # TODO: finish proper usage information and paramter parsing
 ###
-while getopts ":m:i:o:q:d" opt; do
+while getopts ":m:i:o:q:d" opt ; do
  case $opt in
   m)
-   echo "Mapping not yet implemented. you have to provide a sam file."
+   echo "Mapping not yet implemented. you have to provide a sam file." >&2
+   echo $help
+   exit;
    ;;
   :)
    echo "Argument for option -$OPTARG is empty." >&2
+   echo $help
+   exit;
    ;;
   \?)
    echo "Invalid option." >&2
+   echo $help
+ exit;
    ;;
   i)
    input=$OPTARG
@@ -37,6 +52,13 @@ while getopts ":m:i:o:q:d" opt; do
  esac
 done
 
+if [ -z $input ] || [ -z $outdir ] ; then
+ echo $help
+ exit:
+fi
+if [ -z $qval ] ; then
+ echo $help
+fi
 exit
 
 sam=$1
